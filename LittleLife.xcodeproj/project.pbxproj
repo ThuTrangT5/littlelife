@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FCD6542D44DA19A486F6728 /* Pods_LittleLife.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A63B505134ED5CAE1B5898 /* Pods_LittleLife.framework */; };
 		182632BA235EA8A30024825B /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182632B9235EA8A30024825B /* ListViewController.swift */; };
 		182632BC235EA8B20024825B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182632BB235EA8B20024825B /* DetailViewController.swift */; };
 		188521CF236055A70075E3E6 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188521CE236055A70075E3E6 /* RequestManager.swift */; };
@@ -36,6 +37,9 @@
 		18981970235DB2DF0015ED66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18981973235DB2DF0015ED66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18981975235DB2DF0015ED66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94A63B505134ED5CAE1B5898 /* Pods_LittleLife.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LittleLife.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8D00AFB9931DE7E31757CA0 /* Pods-LittleLife.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LittleLife.release.xcconfig"; path = "Target Support Files/Pods-LittleLife/Pods-LittleLife.release.xcconfig"; sourceTree = "<group>"; };
+		F8E663C85FC67F8068D84076 /* Pods-LittleLife.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LittleLife.debug.xcconfig"; path = "Target Support Files/Pods-LittleLife/Pods-LittleLife.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FCD6542D44DA19A486F6728 /* Pods_LittleLife.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +95,8 @@
 			children = (
 				18981966235DB2DD0015ED66 /* LittleLife */,
 				18981965235DB2DD0015ED66 /* Products */,
+				D2BF732B593B17373242E7DA /* Pods */,
+				CE72B140EB22F9941FE4AB55 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +124,24 @@
 			path = LittleLife;
 			sourceTree = "<group>";
 		};
+		CE72B140EB22F9941FE4AB55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				94A63B505134ED5CAE1B5898 /* Pods_LittleLife.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2BF732B593B17373242E7DA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F8E663C85FC67F8068D84076 /* Pods-LittleLife.debug.xcconfig */,
+				E8D00AFB9931DE7E31757CA0 /* Pods-LittleLife.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -124,9 +149,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18981978235DB2DF0015ED66 /* Build configuration list for PBXNativeTarget "LittleLife" */;
 			buildPhases = (
+				FC8EFBCFA31541C17CD5C384 /* [CP] Check Pods Manifest.lock */,
 				18981960235DB2DD0015ED66 /* Sources */,
 				18981961235DB2DD0015ED66 /* Frameworks */,
 				18981962235DB2DD0015ED66 /* Resources */,
+				82B0604769DA95D44E49103B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -182,6 +209,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		82B0604769DA95D44E49103B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LittleLife/Pods-LittleLife-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LittleLife/Pods-LittleLife-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LittleLife/Pods-LittleLife-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC8EFBCFA31541C17CD5C384 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LittleLife-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		18981960235DB2DD0015ED66 /* Sources */ = {
@@ -338,6 +407,7 @@
 		};
 		18981979235DB2DF0015ED66 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8E663C85FC67F8068D84076 /* Pods-LittleLife.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -356,6 +426,7 @@
 		};
 		1898197A235DB2DF0015ED66 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8D00AFB9931DE7E31757CA0 /* Pods-LittleLife.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
