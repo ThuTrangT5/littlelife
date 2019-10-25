@@ -6,8 +6,14 @@
 //  Copyright © 2019 ThuTrangT5. All rights reserved.
 //
 
-import UIKit
+import RxSwift
+import RxCocoa
 
 class LoginViewModel: NSObject {
 
+    var accessToken: BehaviorSubject<String?> = BehaviorSubject<String?>(value: nil)
+    
+    func getAccess() {
+        
+    }
 }

@@ -1,0 +1,20 @@
+
+query FindAllIssues {
+    repository(owner: $owner, name:$respository) {
+        issues(states: $status last: $limit affter: $afterCursor) {
+            totalCount
+            edges {
+                cursor
+                node {
+                    id
+                    title
+                    state
+                    createdAt
+                    comments {
+                        totalCount
+                    }
+                }
+            }
+        }
+    }
+}
