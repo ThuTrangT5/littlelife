@@ -27,8 +27,10 @@ class IssueAuthorTableViewCell: UITableViewCell {
         // Initialization code
         
         selectionStyle = .none
+        imageViewAuthorAvatar.layer.cornerRadius = imageViewAuthorAvatar.frame.height / 2
+        imageViewAuthorAvatar.layer.masksToBounds = true
     }
-
+    
     func bindData() {
         imageViewAuthorAvatar.kf.cancelDownloadTask()
         
@@ -39,6 +41,16 @@ class IssueAuthorTableViewCell: UITableViewCell {
         
         labelIssueName.text = issue?.title
         labelAuthorName.text = issue?.author?.name
-        labelDate.text = issue?.createdAt
+        
+        if let createdAt = issue?.createdAt {
+            var text = "Created: \(createdAt)"
+            if let closedAt = issue?.closedAt {
+                text += "\nClosed: \(closedAt)"
+            }
+            labelDate.text = text
+            
+        } else {
+            labelDate.text = nil
+        }
     }
 }

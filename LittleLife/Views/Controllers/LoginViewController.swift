@@ -27,14 +27,15 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func ontouchGo(_ sender: Any) {
-        // check to login
-        
-        // save access token
-        if let token = self.textFieldAccessToken.text {
-            UserDefaults.standard.setValue(token, forKey: kAccessToken)
+        // validate
+        let token = self.textFieldAccessToken.text ?? ""
+        if token.count == 0 {
+            self.showErrorMessage(message: "Please input access token to continue.")
+            return
         }
         
-        self.gotoNextScreen()
+        //  login
+        self.login()
     }
     
     
@@ -44,6 +45,24 @@ class LoginViewController: UIViewController {
         buttonGo.layer.borderColor = UIColor(red: 251.0/255.0, green: 175.0/255.0, blue: 65.0/255.0, alpha: 1).cgColor
         buttonGo.layer.borderWidth = 1
         buttonGo.layer.cornerRadius = buttonGo.frame.height / 2
+    }
+    
+    private func login() {
+        if let token = self.textFieldAccessToken.text,
+            token.count > 0 {
+            APIManager.shared.login(accessTopken: token) { [weak self](username, error) in
+                if let urs = username {
+                    print("Login user = \(urs)")
+                    // save access token
+                    UserDefaults.standard.setValue(token, forKey: kAccessToken)
+                    
+                    self?.gotoNextScreen()
+                    
+                } else if let error = error {
+                    self?.handleError(error: error)
+                }
+            }
+        }
     }
     
     private func checkToGoNextScreen() {

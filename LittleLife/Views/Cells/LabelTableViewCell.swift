@@ -12,7 +12,7 @@ class LabelTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelText: UILabel!
     
-    var label: Label? {
+    var item: Label? {
         didSet {
             self.bindData()
         }
@@ -22,14 +22,15 @@ class LabelTableViewCell: UITableViewCell {
         // Initialization code
         
         selectionStyle = .none
+        
     }
     
     func bindData() {
-        if let text = label?.name {
+        if let text = item?.name {
             self.labelText.text = "   \(text)   "
         }
         
-        if let color = label?.color {
+        if let color = item?.color {
             self.labelText.backgroundColor = UIColor(hexString: color)
         } else {
             self.labelText.backgroundColor = kTintColor

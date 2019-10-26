@@ -20,7 +20,7 @@ class Comment: BaseModel {
         
         comment = json["bodyText"].string
         
-        if let date = json["node"]["createdAt"].string?.suffix(10) {
+        if let date = json["node"]["publishedAt"].string?.suffix(10) {
             publishedAt = String(date)
         }
         

@@ -15,7 +15,7 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var labelComment: UILabel!
     @IBOutlet weak var labelDate: UILabel!
     
-    var comment: Comment? {
+    var item: Comment? {
            didSet {
                self.bindData()
            }
@@ -26,19 +26,22 @@ class CommentTableViewCell: UITableViewCell {
         // Initialization code
         
         selectionStyle = .none
+        
+        imageViewAuthorAvatar.layer.cornerRadius = imageViewAuthorAvatar.frame.height / 2
+        imageViewAuthorAvatar.layer.masksToBounds = true
     }
 
     func bindData() {
         imageViewAuthorAvatar.kf.cancelDownloadTask()
         
-        if let link = comment?.author?.avatarUrl,
+        if let link = item?.author?.avatarUrl,
             let url = URL(string: link) {
             imageViewAuthorAvatar.kf.setImage(with: url)
         }
         
-        labelComment.text = comment?.comment
-        labelAuthorName.text = comment?.author?.name
-        labelDate.text = comment?.publishedAt
+        labelComment.text = item?.comment
+        labelAuthorName.text = item?.author?.name
+        labelDate.text = item?.publishedAt
     }
 
 }

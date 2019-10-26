@@ -13,7 +13,7 @@ class AssigneeTableViewCell: UITableViewCell {
     @IBOutlet weak var imageViewAssigneeAvatar: UIImageView!
     @IBOutlet weak var labelAssigneeName: UILabel!
     
-    var assignee: User? {
+    var item: User? {
         didSet {
             self.bindData()
         }
@@ -23,16 +23,19 @@ class AssigneeTableViewCell: UITableViewCell {
         // Initialization code
         
         selectionStyle = .none
+        
+        imageViewAssigneeAvatar.layer.cornerRadius = imageViewAssigneeAvatar.frame.height / 2
+        imageViewAssigneeAvatar.layer.masksToBounds = true
     }
     
     func bindData() {
         imageViewAssigneeAvatar.kf.cancelDownloadTask()
         
-        if let link = assignee?.avatarUrl,
+        if let link = item?.avatarUrl,
             let url = URL(string: link) {
             imageViewAssigneeAvatar.kf.setImage(with: url)
         }
         
-        self.labelAssigneeName.text = assignee?.name
+        self.labelAssigneeName.text = item?.name
     }
 }

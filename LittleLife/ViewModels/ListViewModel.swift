@@ -37,11 +37,11 @@ class ListViewModel: BaseViewModel {
         let currentStatus = (try? self.selectedStatus.value()) ?? IssueStatus.open
         
         self.isLoading.onNext(true)
-        APIManager.shared.getIssues(status: currentStatus, after: latestCursor) { [weak self](issues, count, error) in
+        APIManager.shared.getIssues(status: currentStatus, after: latestCursor) { [weak self](issues, count, endCursor, error) in
             self?.isLoading.onNext(false)
             
             if let issues = issues {
-                self?.latestCursor = issues.last?.cursor
+                self?.latestCursor = endCursor
                 self?.totalIssues = count
                 
                 if var currentIssues = try? self?.listIssues.value() {

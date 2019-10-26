@@ -14,13 +14,15 @@ class APIManager: NSObject {
     static var shared: APIManager = APIManager()
     static private let endpoint = "https://api.github.com/graphql"
     
-    private func getHeader() -> HTTPHeaders {
+    private func getHeader(accessToken: String? = nil) -> HTTPHeaders {
         var token = ""
         
         // testing
         
-        if let accessToken = UserDefaults.standard.value(forKey: kAccessToken) as? String {
+        if let accessToken = accessToken {
             token = accessToken
+        } else if let storedAccessToken = UserDefaults.standard.value(forKey: kAccessToken) as? String {
+            token = storedAccessToken
         }
         
         let headers: HTTPHeaders = [
@@ -46,7 +48,7 @@ class APIManager: NSObject {
         return content
     }
     
-    private func sendRequest(query: String, callback: ((JSON, Error?)->Void)?) {
+    private func sendRequest(query: String, accessToken: String? = nil, callback: ((JSON, Error?)->Void)?) {
         
         guard query.count > 0 else {
             let message = "Can not send request with a null query.\nPlease check your query file."
@@ -58,7 +60,7 @@ class APIManager: NSObject {
         }
         
         let url = APIManager.endpoint
-        let headers = self.getHeader()
+        let headers = self.getHeader(accessToken: accessToken)
         
         var repositoryQuery = query
         repositoryQuery = repositoryQuery.replacingOccurrences(of: "$owner", with: "\"\(kRepositoryOwner)\"")
@@ -78,7 +80,9 @@ class APIManager: NSObject {
                     
                 } else if let value = response.value {
                     let json = JSON(value)
-                    let data = json["data"]["repository"]
+                    let data = (json["data"]["repository"] == JSON.null)
+                        ? json["data"]
+                        : json["data"]["repository"]
                     let errors = json["errors"]
                     
                     if errors != JSON.null && errors.count > 0 {
@@ -103,7 +107,26 @@ class APIManager: NSObject {
         }
     }
     
-    func getIssues(status: IssueStatus, after: String?, callback: (([Issue]?, Int, Error?) -> Void)?) {
+    func login(accessTopken: String, callback:((String?, Error?)->Void)?) {
+        let queryFileName = "Login"
+        let query = self.getQueryFromFile(fileName: queryFileName) ?? ""
+        
+        self.sendRequest(query: query, accessToken: accessTopken) { (response, error) in
+            
+            if let error = error {
+                callback?(nil, error)
+                
+            } else if let user = response["viewer"]["login"].string,
+                user.count > 0{
+                callback?(user, nil)
+                
+            } else {
+                callback?(nil, nil)
+            }
+        }
+    }
+    
+    func getIssues(status: IssueStatus, after: String?, callback: (([Issue]?, Int, String?, Error?) -> Void)?) {
         let queryFileName = "GetIssuesByPage"
         var query = self.getQueryFromFile(fileName: queryFileName) ?? ""
         
@@ -125,12 +148,14 @@ class APIManager: NSObject {
             print(response)
             
             if let error = error {
-                callback?(nil, -1, error)
+                callback?(nil, -1, nil, error)
                 
             } else {
                 let totalCount = response["issues"]["totalCount"].intValue
-                let issues: [Issue] = Issue.getArray(json: response["issues"]["edges"])
-                callback?(issues, totalCount, nil)
+                let endCursor = response["issues"]["pageInfo"]["endCursor"].string
+                let nodes = response["issues"]["nodes"]
+                let issues: [Issue] = Issue.getArray(json: nodes)
+                callback?(issues, totalCount, endCursor, nil)
             }
         }
     }

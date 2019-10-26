@@ -37,6 +37,7 @@ class Issue: BaseModel {
     var assignees: [User] = []
     
     var createdAt: String?
+    var closedAt: String?
     var totalComments: Int = 0
     
     var comments: [Comment] = []
@@ -45,9 +46,9 @@ class Issue: BaseModel {
     required init(json: JSON) {
         super.init()
         
-        number = json["node"]["number"].number
-        title = json["node"]["title"].string
-        if let value = json["node"]["state"].string {
+        number = json["number"].number
+        title = json["title"].string
+        if let value = json["state"].string {
             status = IssueStatus(string: value)
         }
         
@@ -59,11 +60,15 @@ class Issue: BaseModel {
             assignees = User.getArray(json: json["assignees"]["nodes"])
         }
         
-        if let date = json["node"]["createdAt"].string?.prefix(10) {
+        if let date = json["createdAt"].string?.prefix(10) {
             createdAt = String(date)
         }
         
-        totalComments = json["node"]["comments"]["totalCount"].intValue
+        if let date = json["closedAt"].string?.prefix(10) {
+            closedAt = String(date)
+        }
+        
+        totalComments = json["comments"]["totalCount"].intValue
         
         if json["comments"] != JSON.null {
             comments = Comment.getArray(json: json["comments"]["nodes"])

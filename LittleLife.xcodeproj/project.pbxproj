@@ -36,6 +36,8 @@
 		18ADE3742362F2B300E505F5 /* AssigneeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE3732362F2B300E505F5 /* AssigneeTableViewCell.swift */; };
 		18ADE3762362F6CA00E505F5 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE3752362F6CA00E505F5 /* UIColor+Hex.swift */; };
 		18CA277523640972001D6ECB /* GetIssueDetail.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 18ADE3672362DF5600E505F5 /* GetIssueDetail.graphql */; };
+		18CA27772364129B001D6ECB /* DetailViewController+ConfigureCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CA27762364129B001D6ECB /* DetailViewController+ConfigureCells.swift */; };
+		18CA2779236420BC001D6ECB /* Login.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 18CA2778236420BC001D6ECB /* Login.graphql */; };
 		18E71BF623618B85000A9B99 /* CommonVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E71BF523618B85000A9B99 /* CommonVariables.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +71,8 @@
 		18ADE3712362F2A300E505F5 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		18ADE3732362F2B300E505F5 /* AssigneeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeTableViewCell.swift; sourceTree = "<group>"; };
 		18ADE3752362F6CA00E505F5 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		18CA27762364129B001D6ECB /* DetailViewController+ConfigureCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+ConfigureCells.swift"; sourceTree = "<group>"; };
+		18CA2778236420BC001D6ECB /* Login.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Login.graphql; sourceTree = "<group>"; };
 		18E71BF523618B85000A9B99 /* CommonVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonVariables.swift; sourceTree = "<group>"; };
 		94A63B505134ED5CAE1B5898 /* Pods_LittleLife.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LittleLife.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D00AFB9931DE7E31757CA0 /* Pods-LittleLife.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LittleLife.release.xcconfig"; path = "Target Support Files/Pods-LittleLife/Pods-LittleLife.release.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 				1898196B235DB2DD0015ED66 /* LoginViewController.swift */,
 				182632B9235EA8A30024825B /* ListViewController.swift */,
 				182632BB235EA8B20024825B /* DetailViewController.swift */,
+				18CA27762364129B001D6ECB /* DetailViewController+ConfigureCells.swift */,
 				1898196D235DB2DD0015ED66 /* Main.storyboard */,
 			);
 			path = Controllers;
@@ -181,6 +186,7 @@
 			children = (
 				18ADE35D2362944400E505F5 /* GetIssuesByPage.graphql */,
 				18ADE3672362DF5600E505F5 /* GetIssueDetail.graphql */,
+				18CA2778236420BC001D6ECB /* Login.graphql */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -275,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18CA277523640972001D6ECB /* GetIssueDetail.graphql in Resources */,
+				18CA2779236420BC001D6ECB /* Login.graphql in Resources */,
 				18ADE3622362B53300E505F5 /* GetIssuesByPage.graphql in Resources */,
 				18981974235DB2DF0015ED66 /* LaunchScreen.storyboard in Resources */,
 				18981971235DB2DF0015ED66 /* Assets.xcassets in Resources */,
@@ -347,6 +354,7 @@
 				182632BA235EA8A30024825B /* ListViewController.swift in Sources */,
 				1808BCD0236064620066D4BF /* ViewController+Loading.swift in Sources */,
 				18ADE3742362F2B300E505F5 /* AssigneeTableViewCell.swift in Sources */,
+				18CA27772364129B001D6ECB /* DetailViewController+ConfigureCells.swift in Sources */,
 				18ADE35E2362944400E505F5 /* GetIssuesByPage.graphql in Sources */,
 				1808BCCD23605E3E0066D4BF /* Comment.swift in Sources */,
 				18ADE3762362F6CA00E505F5 /* UIColor+Hex.swift in Sources */,
