@@ -58,6 +58,8 @@ class ListViewController: UIViewController {
         self.viewModel.listIssues
             .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: IssueSummaryTableViewCell.self)) { (row,model,cell) in
                 cell.issue = model
+                
+                
         }
         .disposed(by: disposeBag)
         
@@ -65,6 +67,13 @@ class ListViewController: UIViewController {
             .modelSelected(Issue.self)
             .subscribe(onNext: { [weak self](model) in
                 self?.viewModel.selectedIssue.onNext(model)
+            })
+            .disposed(by: disposeBag)
+        
+        self.tableView.rx
+            .willDisplayCell
+            .subscribe(onNext: { [weak self](cell, indexPath) in
+                self?.viewModel.checkToLoadMore(atIndex: indexPath.row)
             })
             .disposed(by: disposeBag)
     }

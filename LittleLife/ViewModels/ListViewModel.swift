@@ -54,17 +54,12 @@ class ListViewModel: BaseViewModel {
         }
     }
     
-    func checkHasMoreData() -> Bool {
-        
+    func checkToLoadMore(atIndex index: Int) {
         let currentIssueCount = (try? self.listIssues.value().count) ?? 0
-        if totalIssues > 0 && totalIssues > currentIssueCount {
-            return true
+        
+        if index == currentIssueCount - 1
+            && totalIssues > currentIssueCount{
+            self.getData()
         }
-        
-        return false
-    }
-    
-    func selectIssue(issue: Issue) {
-        
     }
 }
