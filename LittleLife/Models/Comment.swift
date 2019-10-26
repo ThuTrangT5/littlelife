@@ -18,9 +18,10 @@ class Comment: BaseModel {
     required init(json: JSON) {
         super.init()
         
+        id = json["id"].string
         comment = json["bodyText"].string
         
-        if let date = json["node"]["publishedAt"].string?.suffix(10) {
+        if let date = json["publishedAt"].string?.suffix(10) {
             publishedAt = String(date)
         }
         

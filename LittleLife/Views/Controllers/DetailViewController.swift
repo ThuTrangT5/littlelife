@@ -74,7 +74,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         
         self.tableView.addSubview(refresh)
         self.tableView.tableFooterView = UIView()
-//        self.tableView.separatorStyle = .none
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }

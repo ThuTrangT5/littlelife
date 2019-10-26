@@ -1,6 +1,6 @@
 {
   repository(owner: $owner, name:$respository) {
-    issues(states: $status, last: 100) {
+    issues(states: $status first: 100) {
       totalCount
       pageInfo {
         endCursor

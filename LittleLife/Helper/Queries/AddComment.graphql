@@ -1,0 +1,12 @@
+mutation {
+  addComment(input: {body: $comment, subjectId: $issueID}) {
+    subject {
+      id
+    }
+    commentEdge {
+      node {
+        id
+      }
+    }
+  }
+}

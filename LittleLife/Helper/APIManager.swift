@@ -177,11 +177,62 @@ class APIManager: NSObject {
                 callback?(issue, nil)
                 
             } else {
-                let message = "Can not fin information of this issue.\nPlease try again"
+                let message = "Can not find information of this issue.\nPlease try again"
                 let error = NSError(domain: NSURLErrorDomain,
                                     code: 404,
                                     userInfo: [NSLocalizedDescriptionKey: message])
                 callback?(nil, error)
+            }
+        }
+    }
+    
+    func addCommentForIssue(comment: String, issueID: String, callback: ((String?, Error?)->Void)?) {
+        
+        let queryFileName = "AddComment"
+        var query = self.getQueryFromFile(fileName: queryFileName) ?? ""
+        query = query.replacingOccurrences(of: "$comment", with: comment)
+        query = query.replacingOccurrences(of: "$issueID", with: issueID)
+        
+        self.sendRequest(query: query) { (response, error) in
+            print(response)
+            
+            if let error = error {
+                callback?(nil, error)
+                
+            } else if response["commentEdge"]["node"] != JSON.null {
+                let id = response["commentEdge"]["node"]["id"].string
+                callback?(id, nil)
+                
+            } else {
+                let message = "An unexpected error has occurred.\nPlease try again"
+                let error = NSError(domain: NSURLErrorDomain,
+                                    code: 0,
+                                    userInfo: [NSLocalizedDescriptionKey: message])
+                callback?(nil, error)
+            }
+        }
+    }
+    
+    func deleteComment(commentID: String, callback: ((Bool, Error?)->Void)?) {
+        let queryFileName = "DeleteComment"
+        var query = self.getQueryFromFile(fileName: queryFileName) ?? ""
+        query = query.replacingOccurrences(of: "$commentID", with: commentID)
+        
+        self.sendRequest(query: query) { (response, error) in
+            print(response)
+            
+            if let error = error {
+                callback?(false, error)
+                
+            } else if response != JSON.null {
+                callback?(true, nil)
+                
+            } else {
+                let message = "An unexpected error has occurred.\nPlease try again"
+                let error = NSError(domain: NSURLErrorDomain,
+                                    code: 0,
+                                    userInfo: [NSLocalizedDescriptionKey: message])
+                callback?(false, error)
             }
         }
     }
