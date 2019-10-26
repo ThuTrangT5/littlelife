@@ -10,7 +10,7 @@ import SwiftyJSON
 
 open class BaseModel: NSObject {
     
-    var id: NSNumber?
+    var id: String?
     var cursor: String?
     
     public override init() {
@@ -20,7 +20,7 @@ open class BaseModel: NSObject {
     required public init(json: JSON) {
         super.init()
         
-        id = json["id"].number
+        id = json["id"].string
         cursor = json["cursor"].string
     }
 

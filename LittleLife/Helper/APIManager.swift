@@ -107,7 +107,7 @@ class APIManager: NSObject {
         }
     }
     
-    func login(accessTopken: String, callback:((String?, Error?)->Void)?) {
+    func login(accessTopken: String, callback:((User?, Error?)->Void)?) {
         let queryFileName = "Login"
         let query = self.getQueryFromFile(fileName: queryFileName) ?? ""
         
@@ -116,8 +116,9 @@ class APIManager: NSObject {
             if let error = error {
                 callback?(nil, error)
                 
-            } else if let user = response["viewer"]["login"].string,
-                user.count > 0{
+            } else if response["viewer"] != JSON.null {
+                let json = response["viewer"]
+                let user: User = User(json: json)
                 callback?(user, nil)
                 
             } else {

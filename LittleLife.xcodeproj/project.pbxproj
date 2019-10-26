@@ -11,7 +11,7 @@
 		1808BCC923605D3D0066D4BF /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1808BCC823605D3D0066D4BF /* Issue.swift */; };
 		1808BCCB23605E250066D4BF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1808BCCA23605E250066D4BF /* User.swift */; };
 		1808BCCD23605E3E0066D4BF /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1808BCCC23605E3E0066D4BF /* Comment.swift */; };
-		1808BCD0236064620066D4BF /* ViewController+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1808BCCF236064620066D4BF /* ViewController+Loading.swift */; };
+		1808BCD0236064620066D4BF /* ViewController+LoadingViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1808BCCF236064620066D4BF /* ViewController+LoadingViewable.swift */; };
 		182632BA235EA8A30024825B /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182632B9235EA8A30024825B /* ListViewController.swift */; };
 		182632BC235EA8B20024825B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182632BB235EA8B20024825B /* DetailViewController.swift */; };
 		188521CF236055A70075E3E6 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188521CE236055A70075E3E6 /* APIManager.swift */; };
@@ -45,7 +45,7 @@
 		1808BCC823605D3D0066D4BF /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		1808BCCA23605E250066D4BF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1808BCCC23605E3E0066D4BF /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		1808BCCF236064620066D4BF /* ViewController+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Loading.swift"; sourceTree = "<group>"; };
+		1808BCCF236064620066D4BF /* ViewController+LoadingViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+LoadingViewable.swift"; sourceTree = "<group>"; };
 		182632B9235EA8A30024825B /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		182632BB235EA8B20024825B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		188521CE236055A70075E3E6 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		1808BCCE236064210066D4BF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1808BCCF236064620066D4BF /* ViewController+Loading.swift */,
+				1808BCCF236064620066D4BF /* ViewController+LoadingViewable.swift */,
 				1898196B235DB2DD0015ED66 /* LoginViewController.swift */,
 				182632B9235EA8A30024825B /* ListViewController.swift */,
 				182632BB235EA8B20024825B /* DetailViewController.swift */,
@@ -129,9 +129,9 @@
 			isa = PBXGroup;
 			children = (
 				18ADE3652362DE4B00E505F5 /* BaseViewModel.swift */,
+				188521D4236055DB0075E3E6 /* LoginViewModel.swift */,
 				188521D0236055B40075E3E6 /* ListViewModel.swift */,
 				188521D2236055C20075E3E6 /* DetailViewModel.swift */,
-				188521D4236055DB0075E3E6 /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -352,7 +352,7 @@
 				188521CF236055A70075E3E6 /* APIManager.swift in Sources */,
 				18ADE3722362F2A300E505F5 /* LabelTableViewCell.swift in Sources */,
 				182632BA235EA8A30024825B /* ListViewController.swift in Sources */,
-				1808BCD0236064620066D4BF /* ViewController+Loading.swift in Sources */,
+				1808BCD0236064620066D4BF /* ViewController+LoadingViewable.swift in Sources */,
 				18ADE3742362F2B300E505F5 /* AssigneeTableViewCell.swift in Sources */,
 				18CA27772364129B001D6ECB /* DetailViewController+ConfigureCells.swift in Sources */,
 				18ADE35E2362944400E505F5 /* GetIssuesByPage.graphql in Sources */,

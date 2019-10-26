@@ -7,17 +7,23 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var textFieldAccessToken: UITextField!
     @IBOutlet weak var buttonGo: UIButton!
     
+    var viewModel: LoginViewModel = LoginViewModel()
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.setupUI()
+        self.setupBinding()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -34,42 +40,46 @@ class LoginViewController: UIViewController {
             return
         }
         
-        //  login
-        self.login()
+        self.textFieldAccessToken.resignFirstResponder()
     }
     
     
     // MARK:-
     
     private func setupUI() {
-        buttonGo.layer.borderColor = UIColor(red: 251.0/255.0, green: 175.0/255.0, blue: 65.0/255.0, alpha: 1).cgColor
+        buttonGo.layer.borderColor = kTintColor.cgColor
         buttonGo.layer.borderWidth = 1
         buttonGo.layer.cornerRadius = buttonGo.frame.height / 2
     }
     
-    private func login() {
-        if let token = self.textFieldAccessToken.text,
-            token.count > 0 {
-            APIManager.shared.login(accessTopken: token) { [weak self](username, error) in
-                if let urs = username {
-                    print("Login user = \(urs)")
-                    // save access token
-                    UserDefaults.standard.setValue(token, forKey: kAccessToken)
-                    
+    private func setupBinding() {
+        self.bindingBaseRx(withViewModel: viewModel, disposeBag: disposeBag)
+        
+        self.viewModel.user
+            .subscribe(onNext: { [weak self](user) in
+                if let _ = user {
                     self?.gotoNextScreen()
-                    
-                } else if let error = error {
-                    self?.handleError(error: error)
                 }
-            }
-        }
+            })
+            .disposed(by: disposeBag)
+        
+        self.textFieldAccessToken.rx
+            .controlEvent(UIControl.Event.editingDidEnd)
+            .asObservable()
+            .subscribe(onNext: { [weak self](_) in
+                if let text = self?.textFieldAccessToken.text,
+                    text.count > 0 {
+                    self?.viewModel.accessToken.onNext(text)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func checkToGoNextScreen() {
         if let accessToken = UserDefaults.standard.value(forKey: kAccessToken) as? String,
             accessToken.count > 0 {
             // this user is already login
-            // => keep going to List screen
+            // => jump to List screen
             self.gotoNextScreen()
         }
     }

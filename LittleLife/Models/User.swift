@@ -16,6 +16,7 @@ class User: BaseModel {
     required init(json: JSON) {
         super.init()
         
+        id = json["id"].string
         name = json["login"].string
         avatarUrl = json["avatarUrl"].string
     }

@@ -12,6 +12,7 @@ let kRepositoryOwner: String = "ThuTrangT5"
 let kRepositoryName: String = "littlelife"
 let kPagingItemNumber: Int = 10
 let kAccessToken: String = "littlelife_kAccessToken"
+let kUserID: String = "littlelife_kUserID"
 let kqueryFileExtension: String = "graphql"
 
 let kTintColor: UIColor = UIColor(red: 255.0/255.0, green: 157.0/255.0, blue: 4.0/255.0, alpha: 1)

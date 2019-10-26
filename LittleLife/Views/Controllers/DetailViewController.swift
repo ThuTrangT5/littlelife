@@ -34,17 +34,7 @@ class DetailViewController: UIViewController {
     
     func setupBinding() {
         // binding loading && error
-        self.viewModel.isLoading
-            .bind(to: self.rx.isAnimating)
-            .disposed(by: disposeBag)
-        
-        self.viewModel.error
-            .subscribe(onNext: { [weak self](error) in
-                if let error = error {
-                    self?.handleError(error: error)
-                }
-            })
-            .disposed(by: disposeBag)
+        self.bindingBaseRx(withViewModel: viewModel, disposeBag: disposeBag)
         
         self.viewModel.selectedIssue
             .subscribe(onNext: { [weak self](issue) in
