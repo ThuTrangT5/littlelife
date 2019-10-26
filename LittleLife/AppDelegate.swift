@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func gobackLoginScreen(message: String?) {
         
-        if let loginVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginVC") as? ViewController {
+        if let loginVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginVC") as? LoginViewController {
             self.changeRootViewTo(viewController: loginVC)
             
             if let msg = message {

@@ -9,13 +9,36 @@
 import RxSwift
 import RxCocoa
 
-class DetailViewModel: NSObject {
-    var isLoading: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
-    var selectedIssueID: BehaviorSubject<NSNumber?> = BehaviorSubject<NSNumber?>(value: nil)
-    var issue: BehaviorSubject<Issue?> = BehaviorSubject<Issue?>(value: nil)
-
+class DetailViewModel: BaseViewModel {
+    var selectedIssueNumber: BehaviorSubject<NSNumber?> = BehaviorSubject<NSNumber?>(value: nil)
+    var selectedIssue: BehaviorSubject<Issue?> = BehaviorSubject<Issue?>(value: nil)
+    
+    override func setupBinding() {
+        self.selectedIssueNumber
+            .subscribe(onNext: { [weak self](issueNumber) in
+                if let _ = issueNumber {
+                    self?.getData()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func getData() {
+        guard let number = try? self.selectedIssueNumber.value() else {
+            return
+        }
         
+        self.isLoading.onNext(true)
+        
+        APIManager.shared.getIssueDetail(issueNumber: number) { [weak self](issue, error) in
+            self?.isLoading.onNext(false)
+            
+            if let error = error {
+                self?.error.onNext(error)
+            } else if let issue = issue {
+                self?.selectedIssue.onNext(issue)
+            } 
+        }
     }
     
     func addComment(string: String) {

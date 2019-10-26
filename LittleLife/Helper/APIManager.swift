@@ -13,14 +13,11 @@ class APIManager: NSObject {
     
     static var shared: APIManager = APIManager()
     static private let endpoint = "https://api.github.com/graphql"
-    static private let accessToken = "b6fbc3252b550837634d77dac415cf06f6115143"
-    
     
     private func getHeader() -> HTTPHeaders {
         var token = ""
         
         // testing
-        token = APIManager.accessToken
         
         if let accessToken = UserDefaults.standard.value(forKey: kAccessToken) as? String {
             token = accessToken
@@ -50,6 +47,16 @@ class APIManager: NSObject {
     }
     
     private func sendRequest(query: String, callback: ((JSON, Error?)->Void)?) {
+        
+        guard query.count > 0 else {
+            let message = "Can not send request with a null query.\nPlease check your query file."
+            let error = NSError(domain: NSURLErrorDomain,
+                                code: 0,
+                                userInfo: [NSLocalizedDescriptionKey: message])
+            callback?(JSON.null, error)
+            return
+        }
+        
         let url = APIManager.endpoint
         let headers = self.getHeader()
         
@@ -60,6 +67,8 @@ class APIManager: NSObject {
         let params: [String: String] = [
             "query": repositoryQuery
         ]
+        
+        print("QUERY: \(repositoryQuery)")
         
         AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: headers)
             .responseJSON { response in
@@ -72,11 +81,8 @@ class APIManager: NSObject {
                     let data = json["data"]["repository"]
                     let errors = json["errors"]
                     
-                    if data != JSON.null {
-                        callback?(data, nil)
-                        
-                    } else if errors != JSON.null && errors.count > 0 {
-                        let errorMessage = errors[0]["message"]
+                    if errors != JSON.null && errors.count > 0 {
+                        let errorMessage = errors[0]["message"].stringValue
                         
                         let error = NSError(domain: NSURLErrorDomain,
                                             code: 0,
@@ -89,6 +95,9 @@ class APIManager: NSObject {
                                             code: 401,
                                             userInfo: [NSLocalizedDescriptionKey: message])
                         callback?(JSON.null, error)
+                        
+                    }  else if data != JSON.null {
+                        callback?(data, nil)
                     }
                 }
         }
@@ -122,6 +131,31 @@ class APIManager: NSObject {
                 let totalCount = response["issues"]["totalCount"].intValue
                 let issues: [Issue] = Issue.getArray(json: response["issues"]["edges"])
                 callback?(issues, totalCount, nil)
+            }
+        }
+    }
+    
+    func getIssueDetail(issueNumber: NSNumber, callback: ((Issue?, Error?)->Void)?) {
+        let queryFileName = "GetIssueDetail"
+        var query = self.getQueryFromFile(fileName: queryFileName) ?? ""
+        query = query.replacingOccurrences(of: "$issueNumber", with: issueNumber.stringValue)
+        
+        self.sendRequest(query: query) { (response, error) in
+            print(response)
+            
+            if let error = error {
+                callback?(nil, error)
+                
+            } else if response["issue"] != JSON.null {
+                let issue = Issue(json: response["issue"])
+                callback?(issue, nil)
+                
+            } else {
+                let message = "Can not fin information of this issue.\nPlease try again"
+                let error = NSError(domain: NSURLErrorDomain,
+                                    code: 404,
+                                    userInfo: [NSLocalizedDescriptionKey: message])
+                callback?(nil, error)
             }
         }
     }

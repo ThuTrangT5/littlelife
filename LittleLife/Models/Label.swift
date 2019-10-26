@@ -1,23 +1,23 @@
 //
-//  User.swift
+//  IssueLabel.swift
 //  LittleLife
 //
-//  Created by ThuTrangT5 on 10/23/19.
+//  Created by ThuTrangT5 on 10/25/19.
 //  Copyright © 2019 ThuTrangT5. All rights reserved.
 //
 
 import SwiftyJSON
 
-class User: BaseModel {
+class Label: BaseModel {
 
     var name: String?
-    var avatarUrl: String?
+    var color: String?
     
     required init(json: JSON) {
         super.init()
         
-        name = json["login"].string
-        avatarUrl = json["avatarUrl"].string
+        name = json["name"].string
+        color = json["color"].string
     }
     
     required public init?(coder aDecoder: NSCoder) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     @IBOutlet weak var textFieldAccessToken: UITextField!
     @IBOutlet weak var buttonGo: UIButton!
@@ -17,16 +17,45 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.setupUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        // sample access token
-        self.textFieldAccessToken.text = "b6fbc3252b550837634d77dac415cf06f6115143"
+        self.checkToGoNextScreen()
+    }
+    
+    @IBAction func ontouchGo(_ sender: Any) {
+        // check to login
         
+        // save access token
+        if let token = self.textFieldAccessToken.text {
+            UserDefaults.standard.setValue(token, forKey: kAccessToken)
+        }
+        
+        self.gotoNextScreen()
+    }
+    
+    
+    // MARK:-
+    
+    private func setupUI() {
         buttonGo.layer.borderColor = UIColor(red: 251.0/255.0, green: 175.0/255.0, blue: 65.0/255.0, alpha: 1).cgColor
         buttonGo.layer.borderWidth = 1
         buttonGo.layer.cornerRadius = buttonGo.frame.height / 2
     }
     
-    @IBAction func ontouchGo(_ sender: Any) {
+    private func checkToGoNextScreen() {
+        if let accessToken = UserDefaults.standard.value(forKey: kAccessToken) as? String,
+            accessToken.count > 0 {
+            // this user is already login
+            // => keep going to List screen
+            self.gotoNextScreen()
+        }
+    }
+    
+    private func gotoNextScreen() {
         if let mainNav = self.storyboard?.instantiateViewController(identifier: "MainNavigation") ,
             let appdelegate = UIApplication.shared.delegate as? AppDelegate {
             appdelegate.changeRootViewTo(viewController: mainNav)

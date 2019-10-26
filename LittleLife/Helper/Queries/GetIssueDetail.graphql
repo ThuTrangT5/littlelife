@@ -1,0 +1,46 @@
+
+{
+  repository(owner: $owner, name:$respository) {
+    issue(number: $issueNumber) {
+      number
+      id
+      title
+      state
+      createdAt
+      closedAt
+      
+      author {
+        login
+        avatarUrl
+      }
+      
+      labels(first: 10){
+        totalCount
+        nodes {
+          name
+          description
+        }
+      }
+      
+      assignees(first: 10) {
+        totalCount
+        nodes {
+          login
+          avatarUrl
+        }
+      }
+      
+      comments(first: 100) {
+        totalCount
+        nodes {
+          author {
+            login
+            avatarUrl
+          }
+          bodyText
+          publishedAt
+        }
+      }
+    }
+  }
+}

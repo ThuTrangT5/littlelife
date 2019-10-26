@@ -20,7 +20,7 @@
 		188521D5236055DB0075E3E6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188521D4236055DB0075E3E6 /* LoginViewModel.swift */; };
 		18981968235DB2DD0015ED66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18981967235DB2DD0015ED66 /* AppDelegate.swift */; };
 		1898196A235DB2DD0015ED66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18981969235DB2DD0015ED66 /* SceneDelegate.swift */; };
-		1898196C235DB2DD0015ED66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1898196B235DB2DD0015ED66 /* ViewController.swift */; };
+		1898196C235DB2DD0015ED66 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1898196B235DB2DD0015ED66 /* LoginViewController.swift */; };
 		1898196F235DB2DD0015ED66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1898196D235DB2DD0015ED66 /* Main.storyboard */; };
 		18981971235DB2DF0015ED66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18981970235DB2DF0015ED66 /* Assets.xcassets */; };
 		18981974235DB2DF0015ED66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18981972235DB2DF0015ED66 /* LaunchScreen.storyboard */; };
@@ -28,6 +28,14 @@
 		18ADE360236299BB00E505F5 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE35F236299BB00E505F5 /* BaseModel.swift */; };
 		18ADE3622362B53300E505F5 /* GetIssuesByPage.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 18ADE35D2362944400E505F5 /* GetIssuesByPage.graphql */; };
 		18ADE3642362D63300E505F5 /* IssueSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE3632362D63300E505F5 /* IssueSummaryTableViewCell.swift */; };
+		18ADE3662362DE4B00E505F5 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE3652362DE4B00E505F5 /* BaseViewModel.swift */; };
+		18ADE36A2362EBD600E505F5 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE3692362EBD600E505F5 /* Label.swift */; };
+		18ADE36E2362F27E00E505F5 /* IssueAuthorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE36D2362F27E00E505F5 /* IssueAuthorTableViewCell.swift */; };
+		18ADE3702362F29A00E505F5 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE36F2362F29A00E505F5 /* CommentTableViewCell.swift */; };
+		18ADE3722362F2A300E505F5 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE3712362F2A300E505F5 /* LabelTableViewCell.swift */; };
+		18ADE3742362F2B300E505F5 /* AssigneeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE3732362F2B300E505F5 /* AssigneeTableViewCell.swift */; };
+		18ADE3762362F6CA00E505F5 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE3752362F6CA00E505F5 /* UIColor+Hex.swift */; };
+		18CA277523640972001D6ECB /* GetIssueDetail.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 18ADE3672362DF5600E505F5 /* GetIssueDetail.graphql */; };
 		18E71BF623618B85000A9B99 /* CommonVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E71BF523618B85000A9B99 /* CommonVariables.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +53,7 @@
 		18981964235DB2DD0015ED66 /* LittleLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LittleLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18981967235DB2DD0015ED66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18981969235DB2DD0015ED66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1898196B235DB2DD0015ED66 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1898196B235DB2DD0015ED66 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1898196E235DB2DD0015ED66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18981970235DB2DF0015ED66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18981973235DB2DF0015ED66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,6 +61,14 @@
 		18ADE35D2362944400E505F5 /* GetIssuesByPage.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetIssuesByPage.graphql; sourceTree = "<group>"; };
 		18ADE35F236299BB00E505F5 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		18ADE3632362D63300E505F5 /* IssueSummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueSummaryTableViewCell.swift; sourceTree = "<group>"; };
+		18ADE3652362DE4B00E505F5 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		18ADE3672362DF5600E505F5 /* GetIssueDetail.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetIssueDetail.graphql; sourceTree = "<group>"; };
+		18ADE3692362EBD600E505F5 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		18ADE36D2362F27E00E505F5 /* IssueAuthorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAuthorTableViewCell.swift; sourceTree = "<group>"; };
+		18ADE36F2362F29A00E505F5 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		18ADE3712362F2A300E505F5 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		18ADE3732362F2B300E505F5 /* AssigneeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeTableViewCell.swift; sourceTree = "<group>"; };
+		18ADE3752362F6CA00E505F5 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		18E71BF523618B85000A9B99 /* CommonVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonVariables.swift; sourceTree = "<group>"; };
 		94A63B505134ED5CAE1B5898 /* Pods_LittleLife.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LittleLife.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D00AFB9931DE7E31757CA0 /* Pods-LittleLife.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LittleLife.release.xcconfig"; path = "Target Support Files/Pods-LittleLife/Pods-LittleLife.release.xcconfig"; sourceTree = "<group>"; };
@@ -75,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				1808BCCF236064620066D4BF /* ViewController+Loading.swift */,
-				1898196B235DB2DD0015ED66 /* ViewController.swift */,
+				1898196B235DB2DD0015ED66 /* LoginViewController.swift */,
 				182632B9235EA8A30024825B /* ListViewController.swift */,
 				182632BB235EA8B20024825B /* DetailViewController.swift */,
 				1898196D235DB2DD0015ED66 /* Main.storyboard */,
@@ -99,6 +115,7 @@
 				1808BCC823605D3D0066D4BF /* Issue.swift */,
 				1808BCCA23605E250066D4BF /* User.swift */,
 				1808BCCC23605E3E0066D4BF /* Comment.swift */,
+				18ADE3692362EBD600E505F5 /* Label.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -106,6 +123,7 @@
 		188521CC236055870075E3E6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				18ADE3652362DE4B00E505F5 /* BaseViewModel.swift */,
 				188521D0236055B40075E3E6 /* ListViewModel.swift */,
 				188521D2236055C20075E3E6 /* DetailViewModel.swift */,
 				188521D4236055DB0075E3E6 /* LoginViewModel.swift */,
@@ -119,6 +137,7 @@
 				18ADE35C2362942700E505F5 /* Queries */,
 				188521CE236055A70075E3E6 /* APIManager.swift */,
 				18E71BF523618B85000A9B99 /* CommonVariables.swift */,
+				18ADE3752362F6CA00E505F5 /* UIColor+Hex.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -161,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				18ADE35D2362944400E505F5 /* GetIssuesByPage.graphql */,
+				18ADE3672362DF5600E505F5 /* GetIssueDetail.graphql */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -169,6 +189,10 @@
 			isa = PBXGroup;
 			children = (
 				18ADE3632362D63300E505F5 /* IssueSummaryTableViewCell.swift */,
+				18ADE36D2362F27E00E505F5 /* IssueAuthorTableViewCell.swift */,
+				18ADE36F2362F29A00E505F5 /* CommentTableViewCell.swift */,
+				18ADE3712362F2A300E505F5 /* LabelTableViewCell.swift */,
+				18ADE3732362F2B300E505F5 /* AssigneeTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -250,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CA277523640972001D6ECB /* GetIssueDetail.graphql in Resources */,
 				18ADE3622362B53300E505F5 /* GetIssuesByPage.graphql in Resources */,
 				18981974235DB2DF0015ED66 /* LaunchScreen.storyboard in Resources */,
 				18981971235DB2DF0015ED66 /* Assets.xcassets in Resources */,
@@ -306,23 +331,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1898196C235DB2DD0015ED66 /* ViewController.swift in Sources */,
+				1898196C235DB2DD0015ED66 /* LoginViewController.swift in Sources */,
 				18981968235DB2DD0015ED66 /* AppDelegate.swift in Sources */,
 				18E71BF623618B85000A9B99 /* CommonVariables.swift in Sources */,
 				188521D1236055B40075E3E6 /* ListViewModel.swift in Sources */,
 				1808BCC923605D3D0066D4BF /* Issue.swift in Sources */,
+				18ADE3662362DE4B00E505F5 /* BaseViewModel.swift in Sources */,
 				182632BC235EA8B20024825B /* DetailViewController.swift in Sources */,
 				18ADE3642362D63300E505F5 /* IssueSummaryTableViewCell.swift in Sources */,
+				18ADE36A2362EBD600E505F5 /* Label.swift in Sources */,
 				18ADE360236299BB00E505F5 /* BaseModel.swift in Sources */,
+				18ADE3702362F29A00E505F5 /* CommentTableViewCell.swift in Sources */,
 				188521CF236055A70075E3E6 /* APIManager.swift in Sources */,
+				18ADE3722362F2A300E505F5 /* LabelTableViewCell.swift in Sources */,
 				182632BA235EA8A30024825B /* ListViewController.swift in Sources */,
 				1808BCD0236064620066D4BF /* ViewController+Loading.swift in Sources */,
+				18ADE3742362F2B300E505F5 /* AssigneeTableViewCell.swift in Sources */,
 				18ADE35E2362944400E505F5 /* GetIssuesByPage.graphql in Sources */,
 				1808BCCD23605E3E0066D4BF /* Comment.swift in Sources */,
+				18ADE3762362F6CA00E505F5 /* UIColor+Hex.swift in Sources */,
 				1898196A235DB2DD0015ED66 /* SceneDelegate.swift in Sources */,
 				188521D3236055C20075E3E6 /* DetailViewModel.swift in Sources */,
 				188521D5236055DB0075E3E6 /* LoginViewModel.swift in Sources */,
 				1808BCCB23605E250066D4BF /* User.swift in Sources */,
+				18ADE36E2362F27E00E505F5 /* IssueAuthorTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

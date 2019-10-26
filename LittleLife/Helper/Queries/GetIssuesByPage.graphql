@@ -6,6 +6,7 @@ query FindAllIssues {
             edges {
                 cursor
                 node {
+                    number
                     id
                     title
                     state

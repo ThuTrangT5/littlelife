@@ -71,6 +71,8 @@ extension UIViewController {
     func handleError(error: Error) {
         let nsError = error as NSError
         if nsError.code == 401 {//  Unauthorized
+            // clear access token key
+            UserDefaults.standard.removeObject(forKey: kAccessToken)
             (UIApplication.shared.delegate as? AppDelegate)?.gobackLoginScreen(message: nsError.localizedDescription)
         } else {
             let msg = error.localizedDescription

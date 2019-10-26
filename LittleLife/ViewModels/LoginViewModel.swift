@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-class LoginViewModel: NSObject {
+class LoginViewModel: BaseViewModel {
 
     var accessToken: BehaviorSubject<String?> = BehaviorSubject<String?>(value: nil)
     

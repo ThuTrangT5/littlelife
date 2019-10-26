@@ -29,28 +29,49 @@ enum IssueStatus: String {
 
 class Issue: BaseModel {
     
+    var number: NSNumber?
     var title: String?
     var status: IssueStatus = .open
     
-    var ownerID: NSNumber?
-    var authorLogin: String?
-    var assigneeID: NSNumber?
+    var author: User?
+    var assignees: [User] = []
     
     var createdAt: String?
     var totalComments: Int = 0
-
+    
+    var comments: [Comment] = []
+    var labels: [Label] = []
+    
     required init(json: JSON) {
         super.init()
         
+        number = json["node"]["number"].number
         title = json["node"]["title"].string
         if let value = json["node"]["state"].string {
             status = IssueStatus(string: value)
         }
         
-        authorLogin = json["author"]["login"].string
+        if json["author"] != JSON.null {
+            author = User(json: json["author"])
+        }
         
-        createdAt = json["node"]["createdAt"].string?.suffix(10)
+        if json["assignees"] != JSON.null {
+            assignees = User.getArray(json: json["assignees"]["nodes"])
+        }
+        
+        if let date = json["node"]["createdAt"].string?.prefix(10) {
+            createdAt = String(date)
+        }
+        
         totalComments = json["node"]["comments"]["totalCount"].intValue
+        
+        if json["comments"] != JSON.null {
+            comments = Comment.getArray(json: json["comments"]["nodes"])
+        }
+        
+        if json["labels"] != JSON.null {
+            labels = Label.getArray(json: json["labels"]["nodes"])
+        }
         
     }
     
