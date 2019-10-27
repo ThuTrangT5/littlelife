@@ -15,7 +15,12 @@ class DetailViewModel: BaseViewModel {
     var selectedIssue: BehaviorSubject<Issue?> = BehaviorSubject<Issue?>(value: nil)
     var selectedComment: BehaviorSubject<Comment?> = BehaviorSubject<Comment?>(value: nil)
     
+    var comments: BehaviorSubject<[Comment]> = BehaviorSubject<[Comment]>(value: [])
+    
     var isUpdated: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
+    
+    var totalComments: Int = -1
+    var latestCursor: String?
     
     override func setupBinding() {
         self.selectedIssueNumber
@@ -35,6 +40,8 @@ class DetailViewModel: BaseViewModel {
             .disposed(by: disposeBag)
     }
     
+    // MARK:- Read
+    
     func getData() {
         guard let number = try? self.selectedIssueNumber.value() else {
             return
@@ -47,12 +54,68 @@ class DetailViewModel: BaseViewModel {
             
             if let error = error {
                 self?.error.onNext(error)
+                
             } else if let issue = issue {
                 self?.selectedIssue.onNext(issue)
+                self?.reloadComments()
             } 
         }
     }
     
+    func reloadComments() {
+        self.latestCursor = nil
+        self.totalComments = -1
+        self.comments.onNext([])
+        
+        self.getComments()
+    }
+    
+    func getComments() {
+        
+        guard let selectedIssue = try? self.selectedIssue.value(),
+            let issueNumber = selectedIssue.number else {
+                print("Can not detect selected Issue")
+                return
+        }
+        
+        self.isLoading.onNext(true)
+        
+        APIManager.shared.getComments(issueNumber: issueNumber, after: self.latestCursor) { [weak self](comments, count, endCursor, error) in
+            
+            self?.isLoading.onNext(false)
+            
+            if let comments = comments {
+                self?.latestCursor = endCursor
+                self?.totalComments = count
+                
+                if var currentComments = try? self?.comments.value() {
+                    currentComments.append(contentsOf: comments)
+                    self?.comments.onNext(currentComments)
+                }
+            } else {
+                self?.error.onNext(error)
+            }
+        }
+    }
+    
+    func checkToLoadMore(atIndex index: Int) {
+        
+        guard let isLoading = try? self.isLoading.value(),
+            isLoading == false else {
+            return
+        }
+        
+        let currentCommentCount = (try? self.comments.value().count) ?? 0
+        
+        if index == currentCommentCount - 1
+            && totalComments > currentCommentCount{
+            
+            print("==> get more comments at index \(index)")
+            self.getComments()
+        }
+    }
+    
+    // MARK:- Add, Edit, Delete
     func addCommentToSelectedIssue(comment: String) {
         guard comment.count > 0 else {
             print("Comment text can not be empty")

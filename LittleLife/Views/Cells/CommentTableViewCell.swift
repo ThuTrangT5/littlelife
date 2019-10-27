@@ -9,17 +9,18 @@
 import UIKit
 
 class CommentTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var imageViewAuthorAvatar: UIImageView!
     @IBOutlet weak var labelAuthorName: UILabel!
     @IBOutlet weak var labelComment: UILabel!
     @IBOutlet weak var labelDate: UILabel!
+    @IBOutlet weak var labelUpdatedDate: UILabel!
     
     var item: Comment? {
-           didSet {
-               self.bindData()
-           }
-       }
+        didSet {
+            self.bindData()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,7 +31,7 @@ class CommentTableViewCell: UITableViewCell {
         imageViewAuthorAvatar.layer.cornerRadius = imageViewAuthorAvatar.frame.height / 2
         imageViewAuthorAvatar.layer.masksToBounds = true
     }
-
+    
     func bindData() {
         imageViewAuthorAvatar.kf.cancelDownloadTask()
         
@@ -42,6 +43,11 @@ class CommentTableViewCell: UITableViewCell {
         labelComment.text = item?.comment
         labelAuthorName.text = item?.author?.name
         labelDate.text = item?.publishedAt
+        
+        if let updatedAt = item?.updatedAt, updatedAt.count > 0 {
+            labelUpdatedDate.text = "Updated \(updatedAt)"
+        } else {
+            labelUpdatedDate.text = nil
+        }
     }
-
 }

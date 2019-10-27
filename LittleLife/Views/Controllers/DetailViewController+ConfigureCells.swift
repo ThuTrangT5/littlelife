@@ -38,7 +38,10 @@ extension DetailViewController{
             break
             
         case kSectionComments:
-            rows = issue.comments.count
+            if let comments = try? self.viewModel.comments.value() {
+                rows = comments.count
+            }
+            
             break
             
         default:
@@ -117,14 +120,14 @@ extension DetailViewController{
     }
     
     fileprivate func configCommentCell(cell: CommentTableViewCell, atIndex index: Int) {
-        guard let issue = try? self.viewModel.selectedIssue.value(),
+        guard let comments = try? self.viewModel.comments.value(),
             index >= 0,
-            index < issue.comments.count else {
+            index < comments.count else {
                 print("Can not config Comment Cell")
                 return
         }
         
-        cell.item = issue.comments[index]
+        cell.item = comments[index]
     }
     
     func configureHeaderView(forSection section: Int) -> UIView? {
@@ -144,7 +147,7 @@ extension DetailViewController{
                 break
                 
             case kSectionComments:
-                view.textLabel?.text = "Comments (\(issue.comments.count))"
+                view.textLabel?.text = "Comments (\(issue.totalComments))"
                 break
                 
             default:

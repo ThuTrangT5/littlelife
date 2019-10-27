@@ -10,7 +10,7 @@ import UIKit
 
 let kRepositoryOwner: String = "ThuTrangT5"
 let kRepositoryName: String = "littlelife"
-let kPagingItemNumber: Int = 10
+let kPagingItemNumber: Int = 15
 let kAccessToken: String = "littlelife_kAccessToken"
 let kUserID: String = "littlelife_kUserID"
 let kqueryFileExtension: String = "graphql"

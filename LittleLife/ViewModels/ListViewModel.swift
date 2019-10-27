@@ -55,6 +55,12 @@ class ListViewModel: BaseViewModel {
     }
     
     func checkToLoadMore(atIndex index: Int) {
+        
+        guard let isLoading = try? self.isLoading.value(),
+            isLoading == false else {
+            return
+        }
+        
         let currentIssueCount = (try? self.listIssues.value().count) ?? 0
         
         if index == currentIssueCount - 1

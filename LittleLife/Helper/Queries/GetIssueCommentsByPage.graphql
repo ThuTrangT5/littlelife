@@ -1,0 +1,24 @@
+{
+  repository(owner: $owner, name:$respository) {
+    issue(number: $issueNumber) {
+      comments(first: $limit after: $afterCursor) {
+        totalCount
+        pageInfo {
+          endCursor
+        }
+        nodes {
+          id
+          
+          author {
+            login
+            avatarUrl
+          }
+          
+          bodyText
+          publishedAt
+          updatedAt
+        }
+      }
+    }
+  }
+}

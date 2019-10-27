@@ -313,14 +313,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjf-WP-2y6">
-                                                    <rect key="frame" x="15" y="50" width="26" height="16.5"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Italic" family="Avenir Next" pointSize="12"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Public Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfA-dH-7yT">
+                                                    <rect key="frame" x="55" y="35" width="62.5" height="17"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAo-cq-fJA">
-                                                    <rect key="frame" x="15" y="71.5" width="384" height="19.5"/>
+                                                    <rect key="frame" x="15" y="62" width="384" height="19.5"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -333,23 +333,31 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Comment Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gz2-03-lQM">
-                                                    <rect key="frame" x="55" y="20" width="344" height="20"/>
+                                                    <rect key="frame" x="55" y="15" width="344" height="20"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                                                     <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Updated date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjf-WP-2y6">
+                                                    <rect key="frame" x="137.5" y="35" width="76" height="17"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="yAo-cq-fJA" firstAttribute="trailing" secondItem="gz2-03-lQM" secondAttribute="trailing" id="1Sf-DD-fBM"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yAo-cq-fJA" secondAttribute="bottom" constant="15" id="3yy-Jj-p7j"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yAo-cq-fJA" secondAttribute="bottom" constant="20" id="3yy-Jj-p7j"/>
                                                 <constraint firstItem="4Fp-Uv-mzF" firstAttribute="leading" secondItem="f29-P6-uvR" secondAttribute="leading" constant="15" id="65S-c4-1HT"/>
-                                                <constraint firstItem="cjf-WP-2y6" firstAttribute="leading" secondItem="4Fp-Uv-mzF" secondAttribute="leading" id="Bqf-o2-byx"/>
-                                                <constraint firstItem="yAo-cq-fJA" firstAttribute="leading" secondItem="cjf-WP-2y6" secondAttribute="leading" id="C1Z-RO-1hy"/>
-                                                <constraint firstItem="cjf-WP-2y6" firstAttribute="top" secondItem="4Fp-Uv-mzF" secondAttribute="bottom" constant="5" id="HfX-5X-UaK"/>
-                                                <constraint firstItem="gz2-03-lQM" firstAttribute="centerY" secondItem="4Fp-Uv-mzF" secondAttribute="centerY" id="K6g-0M-MhX"/>
-                                                <constraint firstItem="yAo-cq-fJA" firstAttribute="top" secondItem="cjf-WP-2y6" secondAttribute="bottom" constant="5" id="af8-bN-mhV"/>
+                                                <constraint firstItem="yAo-cq-fJA" firstAttribute="leading" secondItem="4Fp-Uv-mzF" secondAttribute="leading" id="EoP-hN-bXQ"/>
+                                                <constraint firstItem="cjf-WP-2y6" firstAttribute="leading" secondItem="tfA-dH-7yT" secondAttribute="trailing" constant="20" id="ExJ-0c-wIb"/>
+                                                <constraint firstItem="gz2-03-lQM" firstAttribute="top" secondItem="4Fp-Uv-mzF" secondAttribute="top" id="JXr-Ls-mBi"/>
+                                                <constraint firstItem="yAo-cq-fJA" firstAttribute="top" secondItem="tfA-dH-7yT" secondAttribute="bottom" constant="10" id="O63-a0-gMg"/>
+                                                <constraint firstItem="cjf-WP-2y6" firstAttribute="centerY" secondItem="tfA-dH-7yT" secondAttribute="centerY" id="RNh-3O-lRL"/>
+                                                <constraint firstItem="tfA-dH-7yT" firstAttribute="leading" secondItem="gz2-03-lQM" secondAttribute="leading" id="VGw-BV-JG4"/>
                                                 <constraint firstItem="4Fp-Uv-mzF" firstAttribute="top" secondItem="f29-P6-uvR" secondAttribute="top" constant="15" id="cJU-rW-BVI"/>
                                                 <constraint firstItem="gz2-03-lQM" firstAttribute="leading" secondItem="4Fp-Uv-mzF" secondAttribute="trailing" constant="10" id="g9X-Ll-BGy"/>
+                                                <constraint firstItem="tfA-dH-7yT" firstAttribute="top" secondItem="gz2-03-lQM" secondAttribute="bottom" id="s4P-gi-wW2"/>
                                                 <constraint firstAttribute="trailing" secondItem="gz2-03-lQM" secondAttribute="trailing" constant="15" id="tbt-iv-0vl"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -357,7 +365,8 @@
                                             <outlet property="imageViewAuthorAvatar" destination="4Fp-Uv-mzF" id="Cbn-tu-HRc"/>
                                             <outlet property="labelAuthorName" destination="gz2-03-lQM" id="pBp-om-rr4"/>
                                             <outlet property="labelComment" destination="yAo-cq-fJA" id="4h3-41-UTC"/>
-                                            <outlet property="labelDate" destination="cjf-WP-2y6" id="8Fc-k9-7KZ"/>
+                                            <outlet property="labelDate" destination="tfA-dH-7yT" id="m0y-tY-XIr"/>
+                                            <outlet property="labelUpdatedDate" destination="cjf-WP-2y6" id="lrr-eW-h5s"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellAssignee" rowHeight="66" id="zHZ-0w-Ipd" customClass="AssigneeTableViewCell" customModule="LittleLife" customModuleProvider="target">

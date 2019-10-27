@@ -44,6 +44,12 @@ class DetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        self.viewModel.comments
+            .subscribe(onNext: { [weak self](_) in
+                self?.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
         self.setupTableView()
     }
     
@@ -80,6 +86,13 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.tableView.rx
+            .willDisplayCell
+            .subscribe(onNext: { [weak self](cell, indexPath) in
+                self?.viewModel.checkToLoadMore(atIndex: indexPath.row)
+            })
+            .disposed(by: disposeBag)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -147,20 +160,21 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func handleEditComment(atIndexPath indexPath: IndexPath) {
-        guard let issue = try? self.viewModel.selectedIssue.value() else {
+        guard let comments = try? self.viewModel.comments.value() else {
             return
         }
         
-        let comment = issue.comments[indexPath.row]
+        let comment = comments[indexPath.row]
         self.viewModel.selectedComment.onNext(comment)
         self.performSegue(withIdentifier: "commentSegue", sender: comment)
     }
     
     func handleDeleteComment(atIndexPath indexPath: IndexPath) {
-        guard let issue = try? self.viewModel.selectedIssue.value() else {
+        guard let comments = try? self.viewModel.comments.value() else {
             return
         }
-        guard let commentID = issue.comments[indexPath.row].id else {
+        
+        guard let commentID = comments[indexPath.row].id else {
             return
         }
         

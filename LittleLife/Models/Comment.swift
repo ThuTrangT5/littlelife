@@ -12,6 +12,7 @@ class Comment: BaseModel {
 
     var comment: String?
     var publishedAt: String?
+    var updatedAt: String?
     
     var author: User?
     
@@ -22,6 +23,10 @@ class Comment: BaseModel {
         
         if let date = json["publishedAt"].string?.prefix(10) {
             publishedAt = String(date)
+        }
+        
+        if let date = json["updatedAt"].string?.prefix(10) {
+            updatedAt = String(date)
         }
         
         if json["author"] != JSON.null {

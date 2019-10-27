@@ -70,7 +70,9 @@ class APIManager: NSObject {
             "query": repositoryQuery
         ]
         
-        print("QUERY: \(repositoryQuery)")
+        print("================ QUERY ================")
+        print(repositoryQuery)
+        print("=======================================")
         
         AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: headers)
             .responseJSON { response in
@@ -127,15 +129,17 @@ class APIManager: NSObject {
         }
     }
     
+    // MARK:- Issue
+    
     func getIssues(status: IssueStatus, after: String?, callback: (([Issue]?, Int, String?, Error?) -> Void)?) {
         let queryFileName = "GetIssuesByPage"
         var query = self.getQueryFromFile(fileName: queryFileName) ?? ""
         
         query = query.replacingOccurrences(of: "$limit", with: "\(kPagingItemNumber)")
-        if let afterCursor = after {
+        if let afterCursor = after, afterCursor.count > 0 {
             query = query.replacingOccurrences(of: "$afterCursor", with: "\"\(afterCursor)\"")
         } else {
-            query = query.replacingOccurrences(of: "affter: $afterCursor", with: "")
+            query = query.replacingOccurrences(of: "after: $afterCursor", with: "")
         }
         
         let state = status.rawValue
@@ -146,15 +150,17 @@ class APIManager: NSObject {
         }
         
         self.sendRequest(query: query) { (response, error) in
-            print(response)
+            
             
             if let error = error {
                 callback?(nil, -1, nil, error)
                 
             } else {
-                let totalCount = response["issues"]["totalCount"].intValue
-                let endCursor = response["issues"]["pageInfo"]["endCursor"].string
-                let nodes = response["issues"]["nodes"]
+                let data = response["issues"]
+                
+                let totalCount = data["totalCount"].intValue
+                let endCursor = data["pageInfo"]["endCursor"].string
+                let nodes = data["nodes"]
                 let issues: [Issue] = Issue.getArray(json: nodes)
                 callback?(issues, totalCount, endCursor, nil)
             }
@@ -167,7 +173,7 @@ class APIManager: NSObject {
         query = query.replacingOccurrences(of: "$issueNumber", with: issueNumber.stringValue)
         
         self.sendRequest(query: query) { (response, error) in
-            print(response)
+            
             
             if let error = error {
                 callback?(nil, error)
@@ -186,6 +192,40 @@ class APIManager: NSObject {
         }
     }
     
+    // MARK:- Comment
+    
+    func getComments(issueNumber: NSNumber, after: String?, callback: (([Comment]?, Int, String?, Error?) -> Void)?) {
+        
+        let queryFileName = "GetIssueCommentsByPage"
+        var query = self.getQueryFromFile(fileName: queryFileName) ?? ""
+        
+        query = query.replacingOccurrences(of: "$issueNumber", with: issueNumber.stringValue)
+        query = query.replacingOccurrences(of: "$limit", with: "\(kPagingItemNumber)")
+        if let afterCursor = after, afterCursor.count > 0 {
+            query = query.replacingOccurrences(of: "$afterCursor", with: "\"\(afterCursor)\"")
+        } else {
+            query = query.replacingOccurrences(of: "after: $afterCursor", with: "")
+        }
+        
+        self.sendRequest(query: query) { (response, error) in
+            
+            
+            if let error = error {
+                callback?(nil, -1, nil, error)
+                
+            } else {
+                let data = response["issue"]["comments"]
+                
+                let totalCount = data["totalCount"].intValue
+                let endCursor = data["pageInfo"]["endCursor"].string
+                let nodes = data["nodes"]
+                
+                let comments: [Comment] = Comment.getArray(json: nodes)
+                callback?(comments, totalCount, endCursor, nil)
+            }
+        }
+    }
+    
     func addCommentForIssue(comment: String, issueID: String, callback: ((String?, Error?)->Void)?) {
         
         let queryFileName = "AddComment"
@@ -194,7 +234,7 @@ class APIManager: NSObject {
         query = query.replacingOccurrences(of: "$issueID", with: "\"\(issueID)\"")
         
         self.sendRequest(query: query) { (response, error) in
-            print(response)
+            
             
             if let error = error {
                 callback?(nil, error)
@@ -219,7 +259,7 @@ class APIManager: NSObject {
         query = query.replacingOccurrences(of: "$commentID", with: "\"\(commentID)\"")
         
         self.sendRequest(query: query) { (response, error) in
-            print(response)
+            
             
             if let error = error {
                 callback?(false, error)
@@ -238,29 +278,29 @@ class APIManager: NSObject {
     }
     
     func editCommentForIssue(comment: String, commentID: String, callback: ((Bool, Error?)->Void)?) {
-          
-          let queryFileName = "EditComment"
-          var query = self.getQueryFromFile(fileName: queryFileName) ?? ""
-          query = query.replacingOccurrences(of: "$commentID", with: "\"\(commentID)\"")
-          query = query.replacingOccurrences(of: "$newComment", with: "\"\(comment)\"")
-          
-          self.sendRequest(query: query) { (response, error) in
-              print(response)
-              
-              if let error = error {
-                  callback?(false, error)
-                  
-              } else if response["updateIssueComment"]["issueComment"] != JSON.null {
-                  let _ = response["updateIssueComment"]["issueComment"]["id"].string
-                  callback?(true, nil)
-                  
-              } else {
-                  let message = "An unexpected error has occurred.\nPlease try again"
-                  let error = NSError(domain: NSURLErrorDomain,
-                                      code: 0,
-                                      userInfo: [NSLocalizedDescriptionKey: message])
-                  callback?(false, error)
-              }
-          }
-      }
+        
+        let queryFileName = "EditComment"
+        var query = self.getQueryFromFile(fileName: queryFileName) ?? ""
+        query = query.replacingOccurrences(of: "$commentID", with: "\"\(commentID)\"")
+        query = query.replacingOccurrences(of: "$newComment", with: "\"\(comment)\"")
+        
+        self.sendRequest(query: query) { (response, error) in
+            
+            
+            if let error = error {
+                callback?(false, error)
+                
+            } else if response["updateIssueComment"]["issueComment"] != JSON.null {
+                let _ = response["updateIssueComment"]["issueComment"]["id"].string
+                callback?(true, nil)
+                
+            } else {
+                let message = "An unexpected error has occurred.\nPlease try again"
+                let error = NSError(domain: NSURLErrorDomain,
+                                    code: 0,
+                                    userInfo: [NSLocalizedDescriptionKey: message])
+                callback?(false, error)
+            }
+        }
+    }
 }

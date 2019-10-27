@@ -40,7 +40,7 @@ class Issue: BaseModel {
     var closedAt: String?
     var totalComments: Int = 0
     
-    var comments: [Comment] = []
+//    var comments: [Comment] = []
     var labels: [Label] = []
     
     required init(json: JSON) {
@@ -70,9 +70,9 @@ class Issue: BaseModel {
         
         totalComments = json["comments"]["totalCount"].intValue
         
-        if json["comments"] != JSON.null {
-            comments = Comment.getArray(json: json["comments"]["nodes"])
-        }
+//        if json["comments"] != JSON.null {
+//            comments = Comment.getArray(json: json["comments"]["nodes"])
+//        }
         
         if json["labels"] != JSON.null {
             labels = Label.getArray(json: json["labels"]["nodes"])

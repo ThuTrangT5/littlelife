@@ -31,17 +31,8 @@
         }
       }
       
-      comments(first: 100) {
+      comments {
         totalCount
-        nodes {
-          id
-          author {
-            login
-            avatarUrl
-          }
-          bodyText
-          publishedAt
-        }
       }
     }
   }
