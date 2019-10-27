@@ -14,7 +14,7 @@ class User: BaseModel {
     var avatarUrl: String?
     
     required init(json: JSON) {
-        super.init()
+        super.init(json: json)
         
         id = json["id"].string
         name = json["login"].string

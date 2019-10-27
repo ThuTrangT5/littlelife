@@ -16,12 +16,11 @@ class Comment: BaseModel {
     var author: User?
     
     required init(json: JSON) {
-        super.init()
+        super.init(json: json)
         
-        id = json["id"].string
         comment = json["bodyText"].string
         
-        if let date = json["publishedAt"].string?.suffix(10) {
+        if let date = json["publishedAt"].string?.prefix(10) {
             publishedAt = String(date)
         }
         

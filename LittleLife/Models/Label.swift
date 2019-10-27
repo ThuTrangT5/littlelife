@@ -14,7 +14,7 @@ class Label: BaseModel {
     var color: String?
     
     required init(json: JSON) {
-        super.init()
+        super.init(json: json)
         
         name = json["name"].string
         color = json["color"].string

@@ -151,6 +151,7 @@ extension DetailViewController{
                 return nil
             }
             
+            view.backgroundColor = UIColor.white
             return view
         }
         return nil

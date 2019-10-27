@@ -52,13 +52,20 @@ class DetailViewModel: BaseViewModel {
         }
     }
     
-    func addComment(text: String, issueID: String) {
-        guard text.count > 0, issueID.count > 0 else {
+    func addCommentToSelectedIssue(comment: String) {
+        guard comment.count > 0 else {
+            print("Comment text can not be empty")
             return
         }
         
+        guard let selectedIssue = try? self.selectedIssue.value(),
+            let issueID = selectedIssue.id else {
+                print("Can not detect selected Issue")
+                return
+        }
+        
         self.isLoading.onNext(true)
-        APIManager.shared.addCommentForIssue(comment: text, issueID: issueID) { [weak self](commentID, error) in
+        APIManager.shared.addCommentForIssue(comment: comment, issueID: issueID) { [weak self](commentID, error) in
             self?.isLoading.onNext(false)
             
             if let error = error {

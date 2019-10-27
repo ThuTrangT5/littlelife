@@ -190,8 +190,8 @@ class APIManager: NSObject {
         
         let queryFileName = "AddComment"
         var query = self.getQueryFromFile(fileName: queryFileName) ?? ""
-        query = query.replacingOccurrences(of: "$comment", with: comment)
-        query = query.replacingOccurrences(of: "$issueID", with: issueID)
+        query = query.replacingOccurrences(of: "$comment", with: "\"\(comment)\"")
+        query = query.replacingOccurrences(of: "$issueID", with: "\"\(issueID)\"")
         
         self.sendRequest(query: query) { (response, error) in
             print(response)
@@ -199,8 +199,8 @@ class APIManager: NSObject {
             if let error = error {
                 callback?(nil, error)
                 
-            } else if response["commentEdge"]["node"] != JSON.null {
-                let id = response["commentEdge"]["node"]["id"].string
+            } else if response["addComment"]["commentEdge"]["node"] != JSON.null {
+                let id = response["addComment"]["commentEdge"]["node"]["id"].string
                 callback?(id, nil)
                 
             } else {
@@ -216,7 +216,7 @@ class APIManager: NSObject {
     func deleteComment(commentID: String, callback: ((Bool, Error?)->Void)?) {
         let queryFileName = "DeleteComment"
         var query = self.getQueryFromFile(fileName: queryFileName) ?? ""
-        query = query.replacingOccurrences(of: "$commentID", with: commentID)
+        query = query.replacingOccurrences(of: "$commentID", with: "\"\(commentID)\"")
         
         self.sendRequest(query: query) { (response, error) in
             print(response)

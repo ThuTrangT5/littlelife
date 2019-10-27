@@ -44,7 +44,7 @@ class Issue: BaseModel {
     var labels: [Label] = []
     
     required init(json: JSON) {
-        super.init()
+        super.init(json: json)
         
         number = json["number"].number
         title = json["title"].string
