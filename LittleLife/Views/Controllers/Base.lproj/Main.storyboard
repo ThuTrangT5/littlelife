@@ -441,7 +441,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Add comment" id="flJ-nG-5U6">
                             <connections>
                                 <action selector="ontouchAddComment:" destination="z2r-Qy-9KV" id="QCn-sl-BJF"/>
-                                <segue destination="UVV-Gj-6B4" kind="showDetail" id="OnP-k9-YLX"/>
+                                <segue destination="UVV-Gj-6B4" kind="showDetail" identifier="commentSegue" id="OnP-k9-YLX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -487,6 +487,9 @@
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" red="0.98431372549999996" green="0.68627450980000004" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="ontouchSubmit:" destination="UVV-Gj-6B4" eventType="touchUpInside" id="WjT-Tq-eO7"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

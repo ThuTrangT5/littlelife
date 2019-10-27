@@ -50,18 +50,26 @@ class AddCommentViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        self.buttonSubmit.rx
-            .tap
-            .bind { [weak self]() in
-                self?.textView.resignFirstResponder()
-                if let text = self?.textView.text, text.count > 0 {
-                    self?.viewModel?.addCommentToSelectedIssue(comment: text)
-                    
-                } else {
-                    self?.showErrorMessage(message: "Please input a comment")
-                }
+        if let selectedComment = try? self.viewModel?.selectedComment.value() {
+            self.textView.text = selectedComment.comment
+        }
+    }
+    
+    @IBAction func ontouchSubmit(_ sender: Any) {
+        self.textView.resignFirstResponder()
+        
+        if let text = self.textView.text, text.count > 0 {
+            if let selectedComment = try? self.viewModel?.selectedComment.value(),
+                let commentID = selectedComment.id,
+                commentID.count > 0 {
+                self.viewModel?.editComment(commentID: commentID, newComment: text)
                 
+            } else {
+                self.viewModel?.addCommentToSelectedIssue(comment: text)
             }
-            .disposed(by: disposeBag)
+            
+        } else {
+            self.showErrorMessage(message: "Please input a comment")
+        }
     }
 }

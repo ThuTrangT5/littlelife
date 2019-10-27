@@ -236,4 +236,31 @@ class APIManager: NSObject {
             }
         }
     }
+    
+    func editCommentForIssue(comment: String, commentID: String, callback: ((Bool, Error?)->Void)?) {
+          
+          let queryFileName = "EditComment"
+          var query = self.getQueryFromFile(fileName: queryFileName) ?? ""
+          query = query.replacingOccurrences(of: "$commentID", with: "\"\(commentID)\"")
+          query = query.replacingOccurrences(of: "$newComment", with: "\"\(comment)\"")
+          
+          self.sendRequest(query: query) { (response, error) in
+              print(response)
+              
+              if let error = error {
+                  callback?(false, error)
+                  
+              } else if response["updateIssueComment"]["issueComment"] != JSON.null {
+                  let _ = response["updateIssueComment"]["issueComment"]["id"].string
+                  callback?(true, nil)
+                  
+              } else {
+                  let message = "An unexpected error has occurred.\nPlease try again"
+                  let error = NSError(domain: NSURLErrorDomain,
+                                      code: 0,
+                                      userInfo: [NSLocalizedDescriptionKey: message])
+                  callback?(false, error)
+              }
+          }
+      }
 }

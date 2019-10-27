@@ -13,6 +13,7 @@ class DetailViewModel: BaseViewModel {
     
     var selectedIssueNumber: BehaviorSubject<NSNumber?> = BehaviorSubject<NSNumber?>(value: nil)
     var selectedIssue: BehaviorSubject<Issue?> = BehaviorSubject<Issue?>(value: nil)
+    var selectedComment: BehaviorSubject<Comment?> = BehaviorSubject<Comment?>(value: nil)
     
     var isUpdated: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
     
@@ -91,6 +92,24 @@ class DetailViewModel: BaseViewModel {
                 self?.isUpdated.onNext(success)
             }
         }
+    }
+    
+    func editComment(commentID: String, newComment: String) {
+        guard newComment.count > 0, commentID.count > 0 else {
+            print("Comment text can not be empty")
+            return
+        }
+        
+        self.isLoading.onNext(true)
+        APIManager.shared.editCommentForIssue(comment: newComment, commentID: commentID, callback: { [weak self](success, error) in
+            self?.isLoading.onNext(false)
+            
+            if let error = error {
+                self?.error.onNext(error)
+            } else {
+                self?.isUpdated.onNext(success)
+            }
+        })
     }
     
 }

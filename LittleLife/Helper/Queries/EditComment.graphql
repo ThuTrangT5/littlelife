@@ -1,0 +1,7 @@
+mutation {
+  updateIssueComment(input: {id: $commentID, body: $newComment}) {
+     issueComment {
+       id
+     }
+  }
+}

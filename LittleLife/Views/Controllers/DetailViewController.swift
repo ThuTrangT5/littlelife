@@ -120,29 +120,61 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            guard let issue = try? self.viewModel.selectedIssue.value() else {
-                return
-            }
-            guard let commentID = issue.comments[indexPath.row].id else {
-                return
-            }
-            
-            // show alert to confirm
-            let alert = UIAlertController(title: nil, message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertController.Style.alert)
-            let yes = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) { [weak self](_) in
-                alert.dismiss(animated: true) {
-                    self?.viewModel.deleteComment(commentID: commentID)
-                }
-            }
-            let no = UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil)
-            alert.addAction(yes)
-            alert.addAction(no)
-            
-            self.present(alert, animated: true, completion: nil)
-            
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let actionEdit = UIContextualAction(style: .normal,
+                                            title: "Edit",
+                                            handler: { [weak self](action, view, completionHandler) in
+                                                self?.handleEditComment(atIndexPath: indexPath)
+                                                completionHandler(true)
+        })
+        actionEdit.backgroundColor = kTintColor
+        let actionDelete = UIContextualAction(style: .normal,
+                                              title: "Delete",
+                                              handler: { [weak self](action, view, completionHandler) in
+                                                self?.handleDeleteComment(atIndexPath: indexPath)
+                                                completionHandler(true)
+        })
+        actionDelete.backgroundColor = UIColor.red
+        
+        
+        let configuration = UISwipeActionsConfiguration(actions: [actionDelete, actionEdit])
+        return configuration
+    }
+    
+    func handleEditComment(atIndexPath indexPath: IndexPath) {
+        guard let issue = try? self.viewModel.selectedIssue.value() else {
+            return
         }
+        
+        let comment = issue.comments[indexPath.row]
+        self.viewModel.selectedComment.onNext(comment)
+        self.performSegue(withIdentifier: "commentSegue", sender: comment)
+    }
+    
+    func handleDeleteComment(atIndexPath indexPath: IndexPath) {
+        guard let issue = try? self.viewModel.selectedIssue.value() else {
+            return
+        }
+        guard let commentID = issue.comments[indexPath.row].id else {
+            return
+        }
+        
+        // show alert to confirm
+        let alert = UIAlertController(title: nil, message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertController.Style.alert)
+        let yes = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) { [weak self](_) in
+            alert.dismiss(animated: true) {
+                self?.viewModel.deleteComment(commentID: commentID)
+            }
+        }
+        let no = UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil)
+        alert.addAction(yes)
+        alert.addAction(no)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }

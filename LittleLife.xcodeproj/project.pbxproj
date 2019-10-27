@@ -41,6 +41,7 @@
 		18CA277D2364B8AF001D6ECB /* AddComment.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 18CA277C2364B8AF001D6ECB /* AddComment.graphql */; };
 		18CA277F2364BCDD001D6ECB /* DeleteComment.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 18CA277E2364BCDD001D6ECB /* DeleteComment.graphql */; };
 		18CA27812365CCF2001D6ECB /* AddCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CA27802365CCF2001D6ECB /* AddCommentViewController.swift */; };
+		18CA27832365E4BB001D6ECB /* EditComment.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 18CA27822365E4BB001D6ECB /* EditComment.graphql */; };
 		18E71BF623618B85000A9B99 /* CommonVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E71BF523618B85000A9B99 /* CommonVariables.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		18CA277C2364B8AF001D6ECB /* AddComment.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AddComment.graphql; sourceTree = "<group>"; };
 		18CA277E2364BCDD001D6ECB /* DeleteComment.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeleteComment.graphql; sourceTree = "<group>"; };
 		18CA27802365CCF2001D6ECB /* AddCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentViewController.swift; sourceTree = "<group>"; };
+		18CA27822365E4BB001D6ECB /* EditComment.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditComment.graphql; sourceTree = "<group>"; };
 		18E71BF523618B85000A9B99 /* CommonVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonVariables.swift; sourceTree = "<group>"; };
 		94A63B505134ED5CAE1B5898 /* Pods_LittleLife.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LittleLife.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D00AFB9931DE7E31757CA0 /* Pods-LittleLife.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LittleLife.release.xcconfig"; path = "Target Support Files/Pods-LittleLife/Pods-LittleLife.release.xcconfig"; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				18ADE3672362DF5600E505F5 /* GetIssueDetail.graphql */,
 				18CA277C2364B8AF001D6ECB /* AddComment.graphql */,
 				18CA277E2364BCDD001D6ECB /* DeleteComment.graphql */,
+				18CA27822365E4BB001D6ECB /* EditComment.graphql */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				18CA277D2364B8AF001D6ECB /* AddComment.graphql in Resources */,
 				18CA2779236420BC001D6ECB /* Login.graphql in Resources */,
 				18CA277F2364BCDD001D6ECB /* DeleteComment.graphql in Resources */,
+				18CA27832365E4BB001D6ECB /* EditComment.graphql in Resources */,
 				18ADE3622362B53300E505F5 /* GetIssuesByPage.graphql in Resources */,
 				18981974235DB2DF0015ED66 /* LaunchScreen.storyboard in Resources */,
 				18981971235DB2DF0015ED66 /* Assets.xcassets in Resources */,
