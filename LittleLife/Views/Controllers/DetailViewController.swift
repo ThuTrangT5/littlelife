@@ -120,4 +120,29 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let issue = try? self.viewModel.selectedIssue.value() else {
+                return
+            }
+            guard let commentID = issue.comments[indexPath.row].id else {
+                return
+            }
+            
+            // show alert to confirm
+            let alert = UIAlertController(title: nil, message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertController.Style.alert)
+            let yes = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) { [weak self](_) in
+                alert.dismiss(animated: true) {
+                    self?.viewModel.deleteComment(commentID: commentID)
+                }
+            }
+            let no = UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil)
+            alert.addAction(yes)
+            alert.addAction(no)
+            
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+    }
 }
